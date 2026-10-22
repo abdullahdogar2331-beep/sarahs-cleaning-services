@@ -54,6 +54,12 @@
 <div class="mobilecta"><a class="btn outline" href="tel:+19415657158">☎ Call Now</a><a class="btn quote-cta" href="#quote">Get a Quote ↗</a></div>
 <script>
 document.getElementById('year').textContent=new Date().getFullYear();
+// Desktop hover opens the native details menu; leaving closes it. Touch users can still tap Services.
+const servicesMenu=document.querySelector('.services-menu');
+if(servicesMenu){
+  servicesMenu.addEventListener('pointerenter',function(){if(window.matchMedia('(hover: hover) and (pointer: fine)').matches)this.open=true;});
+  servicesMenu.addEventListener('pointerleave',function(){if(window.matchMedia('(hover: hover) and (pointer: fine)').matches)this.open=false;});
+}
 document.getElementById('quoteForm').addEventListener('submit',function(e){e.preventDefault();const f=new FormData(this);const subject=encodeURIComponent("Cleaning quote request — "+f.get('name'));const body=encodeURIComponent("Hello Sarah's Cleaning Services LLC,\n\nI'd like to ask about a cleaning quote.\n\nName: "+f.get('name')+"\nEmail: "+f.get('email')+"\nService: "+f.get('service')+"\nDetails: "+(f.get('details')||"Not provided")+"\n\nPlease let me know about availability and next steps.\n\nThank you.");window.location.href='mailto:?subject='+subject+'&body='+body;});
 </script>
 </body></html>
